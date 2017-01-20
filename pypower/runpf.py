@@ -24,6 +24,7 @@ from pypower.makeSbus import makeSbus
 from pypower.dcpf import dcpf
 from pypower.makeYbus import makeYbus
 from pypower.newtonpf import newtonpf
+from pypower.broydenpf import broydenpf
 from pypower.fdpf import fdpf
 from pypower.gausspf import gausspf
 from pypower.makeB import makeB
@@ -153,6 +154,8 @@ def runpf(casedata=None, ppopt=None, fname='', solvedcase=''):
                 solver = 'fast-decoupled, BX'
             elif alg == 4:
                 solver = 'Gauss-Seidel'
+            elif alg == 5:
+                solver = 'broyden'
             else:
                 solver = 'unknown'
             print(' -- AC Power Flow (%s)\n' % solver)
@@ -185,6 +188,8 @@ def runpf(casedata=None, ppopt=None, fname='', solvedcase=''):
                 V, success, _ = fdpf(Ybus, Sbus, V0, Bp, Bpp, ref, pv, pq, ppopt)
             elif alg == 4:
                 V, success, _ = gausspf(Ybus, Sbus, V0, ref, pv, pq, ppopt)
+            elif alg == 5:
+                V, success, _ = broydenpf(Ybus, Sbus, V0, ref, pv, pq, ppopt)
             else:
                 stderr.write('Only Newton''s method, fast-decoupled, and '
                              'Gauss-Seidel power flow algorithms currently '

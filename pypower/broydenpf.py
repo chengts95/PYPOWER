@@ -11,7 +11,7 @@ from numpy import array, angle, exp, linalg, conj, r_, Inf
 
 from scipy.sparse import hstack, vstack
 from scipy.sparse.linalg import spsolve
-
+from scipy.sparse import issparse, csr_matrix as sparse
 from pypower.dSbus_dV import dSbus_dV
 from pypower.ppoption import ppoption
 
@@ -40,7 +40,7 @@ def broydenpf(Ybus, Sbus, V0, ref, pv, pq, ppopt=None):
     """
     ## default arguments
     if ppopt is None:
-        ppopt = {'PF_TOL':1e-8,"PF_MAX_IT":1000,"VERBOSE":False}
+        ppopt = ppoption()
 
     ## options
     tol     = ppopt['PF_TOL']
@@ -98,7 +98,7 @@ def broydenpf(Ybus, Sbus, V0, ref, pv, pq, ppopt=None):
 
 
         ## compute update step
-        dx = -1 * spsolve(J0, F)
+        dx = -1 * spsolve(J, F)
 
 
         ## update voltage
