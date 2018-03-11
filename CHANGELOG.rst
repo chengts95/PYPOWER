@@ -1,6 +1,16 @@
 Changelog
 =========
 
+Version 5.1.2 (2017-06-09)
+--------------------------
+
+- [NEW] Configured continuous integration using Travis.
+
+Version 5.1.0 (2017-06-09)
+--------------------------
+
+- [NEW] Added Python 3 support.
+
 Version 5.0.1 (2016-07-04)
 --------------------------
 
